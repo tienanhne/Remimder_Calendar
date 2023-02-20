@@ -57,7 +57,7 @@ const renderCalendar = () => {
         let today = i === date.getDate() && currMonth === new Date().getMonth()
             && currYear === new Date().getFullYear() ? "active" : "";
         liTag += `<li onclick="clickNode(${i})" class="${today}">${i}</li>`
-        console.log(i);
+        //onsole.log(i);
     }
     for (let i = lastdatofmonth; i < 6; i++) {
         liTag += `<li onclick="clickNode()" class="inactive">${i - lastdatofmonth + 1}</li>`
@@ -106,3 +106,47 @@ Button_Submit.addEventListener("click", function(e){
     
     
 })
+LoadData();
+function LoadData(){
+    let GetData = {
+        method: 'GET',
+        redirect: 'follow'
+    };
+    fetch("http://localhost:3050/Remimder", GetData)
+        .then(response => response.text())
+        .then(data => console.log(data))
+        .catch(error => console.log('error', error));
+
+}
+function DeleteData(){
+    let DelData = {
+        method: 'DELETE',
+        redirect: 'follow'
+      };
+      fetch("http://localhost:3050/Remimder", DelData)
+        .then(response => response.text())
+        .then(result => console.log(result))
+        .catch(error => console.log('error', error));
+}
+function EditData(){
+    let PutData = {
+        method: 'PUT',
+        redirect: 'follow'
+      };
+      
+      fetch("http://localhost:3050/Remimder", PutData)
+        .then(response => response.text())
+        .then(result => console.log(result))
+        .catch(error => console.log('error', error));
+}
+function AddData(){
+    let PostData = {
+        method: 'POST',
+        redirect: 'follow'
+      };
+      
+      fetch("http://localhost:3050/Remimder", PostData)
+        .then(response => response.text())
+        .then(result => console.log(result))
+        .catch(error => console.log('error', error));
+}

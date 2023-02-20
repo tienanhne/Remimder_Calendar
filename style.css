@@ -348,3 +348,23 @@ textarea{
 .navigation ul li.actives a .text-icon{
     color: var(--clr);
 }
+.notification{
+    position: absolute;
+    right: 7%;
+    top: 5%;
+    transition: 0.5s;
+}
+.notification .iconBell{
+    position: relative;
+    color: #f2f2f2;
+    font-size: 30px;
+}
+.notification .iconBell::before{
+    position: absolute;
+    content: '';
+    background: red;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    right: 0;
+}
