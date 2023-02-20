@@ -1,0 +1,350 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: hsl(218, 41%, 15%);
+    background-image:radial-gradient(450px circle at 0% 0%,
+    hsl(218,41%,35%) 15%,
+    hsl(218,41%,30%) 35%,
+    hsl(218,41%,20%) 75%,
+    hsl(218,41%,19%) 80%,
+    transparent 100%
+    ),
+    radial-gradient(650px circle at 0% 0%,
+    hsl(218,41%,45%) 15%,
+    hsl(218,41%,30%) 35%,
+    hsl(218,41%,20%) 75%,
+    hsl(218,41%,19%) 80%,
+    transparent 100%);
+}
+
+.container{
+    width: 550px;
+    background: #fff;
+    border-radius: 10px;
+    /* display: none; */
+}
+header .current_date{
+    font-size: 2rem;
+    font-weight: 550;
+}
+header .icons span{
+    height: 40px;
+    width: 40px;
+    line-height: 42px;
+    text-align: center;
+    border-radius: 50%;
+    margin: 0 2px;
+    font-size: 2.1rem;
+    cursor: pointer;
+    color: #4b474d;
+}
+header .icons span:hover{
+    background: #f2f2f2;
+}
+header .icons span:last-child{
+    margin-right: -10px;
+}
+.container header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 30px 35px 15px;
+}
+.calendar{
+    padding:25px;
+}
+.calendar ul{
+    display: flex;
+    list-style: none;
+    flex-wrap: wrap;
+    text-align: center;
+}
+.calendar .days{
+    margin-bottom: 18px;
+}
+.calendar .weeks li{
+    font-weight: 600;
+    
+}
+.calendar ul li{
+    position: relative;
+    width: calc(100% / 7);
+    font-size: 18px;
+    font-weight: 400;
+}
+.calendar .days li{
+    z-index: 3;
+    margin-top: 35px;
+    cursor: pointer;
+}
+.calendar .days li::before{
+    position: absolute;
+    content: "";
+    height: 45px;
+    width: 45px;
+    top: 50%;
+    left: 50%;
+    z-index: -1;
+    border-radius: 50%;
+    transform: translate(-50%,-50%);
+}
+.days li:hover::before{
+    background-color: #f2f2f2;
+}
+.days li.inactive{
+    color: #aaa;
+}
+.days li.active{
+    color: #ffffff;
+}
+.days li.active::before{
+    background: rgb(40, 50, 85);
+}
+.modalBox{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    width: 350px;
+    background-color: #f2f2f2;
+    border-radius: 10px;
+    
+}
+.overplay{
+    position: fixed;
+    z-index: 5;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    padding-top: 100px;
+    background-color: rgb(0, 0, 0);
+    background-color: rgb(0, 0, 0, 0.4);
+    display: none;
+}
+.headers{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 25px 30px 10px;
+}
+.headers p{
+    font-weight: 550;
+    font-size: 1.45rem;
+}
+.headers span{
+    height: 40px;
+    width: 40px;
+    line-height: 42px;
+    text-align: center;
+    border-radius: 50%;
+    margin: 0 2px;
+    font-size: 2.1rem;
+    cursor: pointer;
+    color: #4b474d;
+}
+.boxinput{
+    display: flex;
+    flex-direction: column;
+    padding: 25px 30px 10px;
+}
+.boxinput input{
+    width: 100%;
+    border: none;
+    margin-bottom: 15px;
+    outline: none;
+   padding: 10px;
+}
+.date_modal{
+    margin-bottom: 5px;
+    font-size: 16px;
+    font-weight: 450;
+    color: rgb(226, 47, 47);
+}
+textarea{
+    border: none;
+    outline: none;
+    padding: 10px;
+}
+.boxinput .button{
+    text-align: center;
+    margin-top: 15px;
+}
+.button button{
+    padding: 10px 20px 10px 20px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    background: rgb(40, 50, 85);
+    color: #fff;
+}
+.lds-hourglass {
+    display: inline-block;
+    position: relative;
+    width: 80px;
+    height: 80px;
+  }
+  .lds-hourglass:after {
+    content: " ";
+    display: block;
+    border-radius: 50%;
+    width: 0;
+    height: 0;
+    margin: 8px;
+    box-sizing: border-box;
+    border: 32px solid #fff;
+    border-color: #fff transparent #fff transparent;
+    animation: lds-hourglass 1.2s infinite;
+  }
+  @keyframes lds-hourglass {
+    0% {
+      transform: rotate(0);
+      animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+    }
+    50% {
+      transform: rotate(900deg);
+      animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+    }
+    100% {
+      transform: rotate(1800deg);
+    }
+  }
+
+/* sidebar css dinhtien*/
+
+.navigation{
+    position: fixed;
+    inset: 20px 0 20px 20px;
+    width: 70px;
+    background: #f2f2f2;
+    transition: 0.5s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.navigation.openMenu{
+    width: 250px;
+}
+.menutoggle{
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 60px;
+    width: 100%;
+    border-bottom: 1px solid #555;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 0 19px;
+}
+.navigation .menutoggle::before{
+    content: '';
+    position: absolute;
+    background: #333;
+    width: 30px;
+    height: 2px;
+    transform: translateY(-8px);
+    transform: 0.5s;
+}
+.navigation.openMenu .menutoggle::before{
+    transform: translateY(0px) rotate(-45deg);
+}
+.navigation.openMenu .menutoggle::after{
+    transform: translateY(0px) rotate(45deg);
+    box-shadow: 0 0 0 #333;
+}
+.navigation .menutoggle::after{
+    content: '';
+    position: absolute;
+    background: #333;
+    width: 30px;
+    height: 2px;
+    transform: translateY(8px);
+    transform: 0.5s;
+    box-shadow: 0 -8px 0 #333;
+}
+.navigation ul{
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+}
+.navigation ul li{
+    position: relative;
+    width: 100%;
+    height: 60px;
+    padding: 0 10px;
+    transition: 0.5s;
+}
+.navigation ul li a{
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    text-decoration: none;
+    text-align: center;
+}
+.navigation ul li.actives{
+    transform: translateX(30px);
+}
+.navigation.open ul li.actives{
+    transform: translateX(10px);
+}
+.navigation ul li a .icon{
+    position: relative;
+    display: block;
+    min-width: 54px;
+    height: 53px;
+    line-height: 54px;
+    transition: 0.5s;
+    border-radius: 10px;
+    font-size: 1.75em;
+    color: #222;
+}
+.navigation ul li.actives a .icon{
+    transition: 0.5s;
+    color: #fff;
+    background: var(--clr);
+}
+.navigation ul li a .icon::before{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--clr);  
+  border-radius: 15px;
+  opacity: 0;
+  transition: 0.5s;
+}
+.navigation ul li.actives a .icon::before{
+    opacity: 0.5;
+}
+.navigation ul li a .text-icon{
+    position: relative;
+    padding: 0 15px;
+    height: 60px;
+    color: #333;
+    align-items: center;
+    display: flex;
+    visibility: hidden;
+    opacity: 0;
+    transition: 0.5s;
+}
+.navigation.openMenu ul li a .text-icon{
+  opacity: 1;
+  visibility: visible;  
+}
+.navigation ul li.actives a .text-icon{
+    color: var(--clr);
+}
