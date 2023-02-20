@@ -368,3 +368,40 @@ textarea{
     border-radius: 50%;
     right: 0;
 }
+
+
+
+
+/*
+Blog css
+*/
+.BlogApp{
+    width: 100%;
+    display: block;
+    padding: 0;
+}
+.BlogLayout{
+    max-width: 1200px;
+    margin: 0 auto;
+}
+.boxBlog{
+    background-color: #f2f2f2;
+    border-radius: 5px;
+    min-height: 100px;
+    width: 100%;
+}
+.Row{
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: -4px;
+    margin-right: -4px;
+}
+.Col{
+    padding-left: 4px;
+    padding-right: 4px;
+    margin-bottom: 5px;
+}
+.c-2-4{
+    flex: 0 0 25%;
+    max-width: 25%;
+}

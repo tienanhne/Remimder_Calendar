@@ -12,13 +12,13 @@ let date = new Date(),
     currMonth = date.getMonth();
 
 // sidebar JS 
-menutoggle.onclick = function (){
+menutoggle.onclick = function () {
     navigation.classList.toggle("openMenu")
-} 
-function activeList(){
+}
+function activeList() {
     listMenu.forEach((item) => (
         item.classList.remove('actives')))
-        this.classList.add('actives')
+    this.classList.add('actives')
 }
 listMenu.forEach((item) => item.addEventListener('click', activeList))
 
@@ -79,19 +79,19 @@ leftorright.forEach(icon => {
         renderCalendar();
     })
 })
-var overplay =  document.querySelector(".overplay"),
-reminderDate = document .querySelector(".dateView"),
-modalshow = document .querySelector(".modalBox");
+var overplay = document.querySelector(".overplay"),
+    reminderDate = document.querySelector(".dateView"),
+    modalshow = document.querySelector(".modalBox");
 let Button_Submit = document.getElementById("Submit");
-function hideModal(){
+function hideModal() {
     overplay.style.display = "none";
 }
 overplay.addEventListener('click', hideModal)
-modalshow.addEventListener('click', function(event){
+modalshow.addEventListener('click', function (event) {
     event.stopPropagation()
 })
 function clickNode(value) {
-    
+
 
     overplay.style.display = "block";
     reminderDate.innerText = `Ngày ${value} Tháng ${currMonth + 1} Năm ${currYear}`
@@ -101,52 +101,44 @@ Close.addEventListener("click", () => {
     document.querySelector(".overplay").style.display = "none";
 
 })
-Button_Submit.addEventListener("click", function(e){
+Button_Submit.addEventListener("click", function (e) {
     e.defaultPrevented();
-    
-    
-})
-LoadData();
-function LoadData(){
-    let GetData = {
-        method: 'GET',
-        redirect: 'follow'
-    };
-    fetch("http://localhost:3050/Remimder", GetData)
-        .then(response => response.text())
-        .then(data => console.log(data))
-        .catch(error => console.log('error', error));
 
-}
-function DeleteData(){
+
+})
+
+function DeleteData() {
     let DelData = {
         method: 'DELETE',
         redirect: 'follow'
-      };
-      fetch("http://localhost:3050/Remimder", DelData)
+    };
+    fetch("http://localhost:3050/Remimder", DelData)
         .then(response => response.text())
-        .then(result => console.log(result))
+        .then(result => console.log(result)
+
+        )
         .catch(error => console.log('error', error));
 }
-function EditData(){
+function EditData() {
     let PutData = {
         method: 'PUT',
         redirect: 'follow'
-      };
-      
-      fetch("http://localhost:3050/Remimder", PutData)
+    };
+
+    fetch("http://localhost:3050/Remimder", PutData)
         .then(response => response.text())
         .then(result => console.log(result))
         .catch(error => console.log('error', error));
 }
-function AddData(){
+function AddData() {
     let PostData = {
         method: 'POST',
         redirect: 'follow'
-      };
-      
-      fetch("http://localhost:3050/Remimder", PostData)
+    };
+
+    fetch("http://localhost:3050/Remimder", PostData)
         .then(response => response.text())
         .then(result => console.log(result))
         .catch(error => console.log('error', error));
+
 }
