@@ -62,8 +62,12 @@ const renderCalendar = () => {
     for (let i = lastdatofmonth; i < 6; i++) {
         liTag += `<li onclick="clickNode()" class="inactive">${i - lastdatofmonth + 1}</li>`
     }
-    currentDate.innerText = `Tháng ${currMonth + 1} ${currYear}`
-    daysTag.innerHTML = liTag;
+    currentDate.innerHTML = `Tháng ${currMonth + 1} ${currYear}`
+    if (daysTag) {
+        daysTag.innerHTML = liTag;
+    } else {
+        console.log('element not found');
+    }
 }
 renderCalendar();
 leftorright.forEach(icon => {
@@ -91,24 +95,48 @@ modalshow.addEventListener('click', function (event) {
     event.stopPropagation()
 })
 function clickNode(value) {
-
-
     overplay.style.display = "block";
     reminderDate.innerText = `Ngày ${value} Tháng ${currMonth + 1} Năm ${currYear}`
 }
 
 Close.addEventListener("click", () => {
     document.querySelector(".overplay").style.display = "none";
-
 })
-Button_Submit.addEventListener("click", function (e) {
-    e.defaultPrevented();
 
-
+function CreateBlog(data, callback) {
+    let options = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    };
+    fetch("http://localhost:3000/Remimder", options)
+        .then(function (response) { response.json() })
+        .then(callback)
+        .catch(error => console.log('error', error));
+}
+var Form = document.getElementById("Form")
+Form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var tieude = document.getElementById("tieude").value,
+        mota = document.getElementById("mota").value,
+        noidung = document.getElementById("noidung").value;
+    var FormData = {
+        Title: tieude,
+        Describe: mota,
+        Content: noidung,
+    }
+    CreateBlog(FormData)
+    console.log(FormData)
+    document.querySelector(".overplay").style.display = "none";
 })
+
+
 
 
 // Blog
+
 
 function DeleteData() {
     let DelData = {
@@ -132,16 +160,4 @@ function EditData() {
         .then(response => response.text())
         .then(result => console.log(result))
         .catch(error => console.log('error', error));
-}
-function AddData() {
-    let PostData = {
-        method: 'POST',
-        redirect: 'follow'
-    };
-
-    fetch("http://localhost:3050/Remimder", PostData)
-        .then(response => response.text())
-        .then(result => console.log(result))
-        .catch(error => console.log('error', error));
-
 }

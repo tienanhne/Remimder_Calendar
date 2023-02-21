@@ -12,7 +12,7 @@
 
 <body>
     <div class="notification">
-       <span class="iconBell"><i class='bx bx-bell'></i></span> 
+        <span class="iconBell"><i class='bx bx-bell'></i></span>
     </div>
     <div class="navigation">
         <div class="menutoggle"></div>
@@ -25,19 +25,19 @@
             </li>
             <li class="listMenu" style="--clr: #25b93d">
                 <a href="./messeger.html">
-                    <span class="icon" ><i class="bx bx-message-dots"></i></span>
+                    <span class="icon"><i class="bx bx-message-dots"></i></span>
                     <span class="text-icon">Messenger</span>
                 </a>
             </li>
             <li class="listMenu" style="--clr: #bfda27">
                 <a href="./edit.html">
-                    <span class="icon" ><i class="bx bx-edit"></i></span>
+                    <span class="icon"><i class="bx bx-edit"></i></span>
                     <span class="text-icon">Edit</span>
                 </a>
             </li>
             <li class="listMenu" style="--clr: #2899e4">
                 <a href="./blog.html">
-                    <span class="icon" ><i class="bx bxl-blogger"></i></span>
+                    <span class="icon"><i class="bx bxl-blogger"></i></span>
                     <span class="text-icon">Blog</span>
                 </a>
             </li>
@@ -79,12 +79,15 @@
                 <div class="date_modal">
                     <span class="dateView"></span>
                 </div>
-                <input type="text" placeholder="Tiêu Đề">
-                <input type="text" placeholder="Mô tả">
-                <textarea placeholder="Nội Dung" cols="30" rows="5"></textarea>
-                <div class="button">
-                    <button id="Submit" type="submit">Submit</button>
-                </div>
+                <form id="Form" method="post">
+                    <input id="tieude" type="text" placeholder="Tiêu Đề">
+                    <input id="mota" type="text" placeholder="Mô tả">
+                    <textarea id="noidung" placeholder="Nội Dung" cols="30" rows="5"></textarea>
+                    <div class="button">
+                        <button id="Submit" type="submit">Submit</button>
+                    </div>
+                </form>
+
 
             </div>
         </div>
@@ -93,6 +96,7 @@
 
     <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
     <script src="main.js"></script>
+
 </body>
 
 </html>
