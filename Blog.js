@@ -1,26 +1,26 @@
-LoadData();
+const api = 'http://localhost:3000/Remimder'
+function start(){
+    getNote(render);
+}
+start();
+function getNote(cb) {
+    fetch(api)
+        .then(response => response.json())
+        .then(cb)
 
-function LoadData() {
-    fetch("http://localhost:3050/Remimder")
-        .then(function (response) {
-            return response.json();
-        })
-        .then(function (Gets) {
-            console.log(Gets);
-            let RenderHtml = Gets.map((item) => {
-                return `
-                    <div class="Col c-2-4">
-                        <div class="boxBlog">
-                        <h1>${item.Id} ${item.Title}</h1>
-                        <p>${item.Describe}</p>
-                        <p>${item.Content}</p>
-                        </div>
+}
+
+function render(notes) {
+    const listNote = document.querySelector('.row')
+    let RenderHtml = notes.map((note) => {
+        return `
+            <div class="col c-3 box-note">
+                <div class="boxBlog">
+                <h1>${note.Id} ${note.Title}</h1>
+                <p>${note.Describe}</p>
+                <p>${note.Content}</p>
                 </div>
-                `
-            })
-            var htmls = RenderHtml.join("");
-          
-             document.querySelector('.Row').innerHTML = htmls;
-        })
-
+            </div>`
+    }).join('')
+    listNote.innerHTML = RenderHtml;
 }

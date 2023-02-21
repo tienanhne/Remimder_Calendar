@@ -107,6 +107,9 @@ Button_Submit.addEventListener("click", function (e) {
 
 })
 
+
+// Blog
+
 function DeleteData() {
     let DelData = {
         method: 'DELETE',
