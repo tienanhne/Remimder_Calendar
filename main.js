@@ -166,10 +166,6 @@ const Form = document.getElementById("Form")
         document.querySelector(".overplay").style.display = "none";
     })
 }
-
-
-
-
 // Blog
 function addNote(data){
     const option = {
