@@ -300,6 +300,10 @@ textarea{
 .navigation.open ul li.actives{
     transform: translateX(10px);
 }
+.isToday{
+    border-bottom: 2px solid rgb(40,50,85);
+}
+
 .navigation ul li a .icon{
     position: relative;
     display: block;

@@ -44,7 +44,8 @@ listMenu.forEach((item) => item.addEventListener('click', activeList))
 //     "November",
 //     "December"]
 
-const renderCalendar = () => {
+function renderCalendar(data){
+    console.log(data);
     let firstDay = new Date(currYear, currMonth, 1).getDay(),
         lastDate = new Date(currYear, currMonth + 1, 0).getDate(), // xem ngày cuối cùng của tháng
         lastdatofmonth = new Date(currYear, currMonth, lastDate).getDay(),
@@ -56,7 +57,25 @@ const renderCalendar = () => {
     for (let i = 1; i <= lastDate; i++) {
         let today = i === date.getDate() && currMonth === new Date().getMonth()
             && currYear === new Date().getFullYear() ? "active" : "";
-        liTag += `<li onclick="clickNode(${i})" class="${today}">${i}</li>`
+        
+            let isToday 
+        if(data){
+            data.forEach(data =>
+                {
+                    if(i === data.day && currMonth === data.month && currYear === data.year){
+
+                        
+                          isToday  = "isToday"
+                          return isToday
+                    }
+                    console.log(isToday);
+                   
+                })
+            
+        }
+        // console.log(isToday);
+        liTag += `<li onclick="clickNode(${i},${currMonth},${currYear})" class="${today} ${isToday}">${i}</li>`
+
         //onsole.log(i);
     }
     for (let i = lastdatofmonth; i < 6; i++) {
@@ -68,8 +87,16 @@ const renderCalendar = () => {
     } else {
         console.log('element not found');
     }
+    
 }
-renderCalendar();
+const api = 'http://localhost:3000/Remimder'
+function getNote() {
+    fetch(api)
+        .then(response => response.json())
+        .then(renderCalendar)
+
+}
+getNote()
 leftorright.forEach(icon => {
     icon.addEventListener("click", () => {
         currMonth = icon.id === "left" ? currMonth - 1 : currMonth + 1;
@@ -80,7 +107,7 @@ leftorright.forEach(icon => {
         } else {
             date = new Date()
         }
-        renderCalendar();
+        getNote();
     })
 })
 var overplay = document.querySelector(".overplay"),
@@ -94,9 +121,10 @@ overplay.addEventListener('click', hideModal)
 modalshow.addEventListener('click', function (event) {
     event.stopPropagation()
 })
-function clickNode(value) {
+function clickNode(day,month,year) {
     overplay.style.display = "block";
-    reminderDate.innerText = `Ngày ${value} Tháng ${currMonth + 1} Năm ${currYear}`
+    reminderDate.innerText = `Ngày ${day} Tháng ${currMonth + 1} Năm ${currYear}`
+    openModal(day,month,year)
 }
 
 Close.addEventListener("click", () => {
@@ -104,6 +132,7 @@ Close.addEventListener("click", () => {
 })
 
 function CreateBlog(data, callback) {
+    console.log(data);
     let options = {
         method: 'POST',
         headers: {
@@ -113,30 +142,46 @@ function CreateBlog(data, callback) {
     };
     fetch("http://localhost:3000/Remimder", options)
         .then(function (response) { response.json() })
-        .then(callback)
+        .then((data) => console.log(data))
         .catch(error => console.log('error', error));
 }
-var Form = document.getElementById("Form")
-Form.addEventListener('submit', function (e) {
-    e.preventDefault();
-    var tieude = document.getElementById("tieude").value,
-        mota = document.getElementById("mota").value,
-        noidung = document.getElementById("noidung").value;
-    var FormData = {
-        Title: tieude,
-        Describe: mota,
-        Content: noidung,
-    }
-    CreateBlog(FormData)
-    console.log(FormData)
-    document.querySelector(".overplay").style.display = "none";
-})
+function openModal(day,month,year){
+    console.log(day,month,year);
+const Form = document.getElementById("Form")
+    Form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        var tieude = document.getElementById("tieude").value,
+            mota = document.getElementById("mota").value,
+            noidung = document.getElementById("noidung").value;
+        var FormData = {
+            Title: tieude,
+            Describe: mota,
+            Content: noidung,
+            day,
+            month,
+            year
+        }
+        CreateBlog(FormData)
+        console.log(FormData)
+        document.querySelector(".overplay").style.display = "none";
+    })
+}
 
 
 
 
 // Blog
-
+function addNote(data){
+    const option = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(data)
+    }
+    fetch(api,option)
+        .then(response => response.json())
+}
 
 function DeleteData() {
     let DelData = {
