@@ -62,14 +62,10 @@ function renderCalendar(data){
         if(data){
             data.forEach(data =>
                 {
-                    if(i === data.day && currMonth === data.month && currYear === data.year){
-
-                        
+                    if(i === data.day && currMonth === data.month && currYear === data.year){                        
                           isToday  = "isToday"
                           return isToday
                     }
-                    console.log(isToday);
-                   
                 })
             
         }
@@ -164,6 +160,7 @@ const Form = document.getElementById("Form")
         CreateBlog(FormData)
         console.log(FormData)
         document.querySelector(".overplay").style.display = "none";
+        setTimeout(document.querySelector(".alert").classList.add("show"), 5000);
     })
 }
 // Blog
@@ -179,26 +176,3 @@ function addNote(data){
         .then(response => response.json())
 }
 
-function DeleteData() {
-    let DelData = {
-        method: 'DELETE',
-        redirect: 'follow'
-    };
-    fetch("http://localhost:3050/Remimder", DelData)
-        .then(response => response.text())
-        .then(result => console.log(result)
-
-        )
-        .catch(error => console.log('error', error));
-}
-function EditData() {
-    let PutData = {
-        method: 'PUT',
-        redirect: 'follow'
-    };
-
-    fetch("http://localhost:3050/Remimder", PutData)
-        .then(response => response.text())
-        .then(result => console.log(result))
-        .catch(error => console.log('error', error));
-}
