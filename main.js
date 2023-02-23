@@ -176,3 +176,39 @@ function addNote(data){
         .then(response => response.json())
 }
 
+
+function DeleteData() {
+    let DelData = {
+        method: 'DELETE',
+        redirect: 'follow'
+    };
+    fetch("http://localhost:3050/Remimder", DelData)
+        .then(response => response.text())
+        .then(result => console.log(result)
+
+        )
+        .catch(error => console.log('error', error));
+}
+function EditData() {
+    let PutData = {
+        method: 'PUT',
+        redirect: 'follow'
+    };
+
+    fetch("http://localhost:3050/Remimder", PutData)
+        .then(response => response.text())
+        .then(result => console.log(result))
+        .catch(error => console.log('error', error));
+}
+//open notification
+function openNotifi() {
+    const ring = document.querySelector('.btn-ring')
+    ring.onclick = () => {
+        const formNoti = document.querySelector('.form-noti')
+        
+        formNoti.classList.toggle("active")
+    }
+}
+openNotifi()
+
+
