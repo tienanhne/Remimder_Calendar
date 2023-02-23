@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="./grid.css">
     <title>Document</title>
 </head>
 <body>
@@ -32,8 +33,37 @@
             </li>
         </ul>
     </div>
-    <h1>Thông báo ở đây</h1>
+    <div class="BoxTask grid wide">
+        <div class="blog_task BlogLayout">
+            <div class="row list-note">
+                
+            </div>
+            <div class="btn_Task">
+                <button type="button">Add Task +</button>
+            </div>
+        </div>
+        
+    </div>
+    <div class="overplay">
+        <div class="modalBox">
+            <div class="headers">
+                <p>Reminder</p>
+                <span id="close" class='bx bx-x'></span>
+            </div>
+            <div class="boxinput">
+               
+                    <input id="index" type="hidden">
+                    <input id="tieude" type="text" placeholder="Tiêu Đề" autofocus>
+                    <input id="mota" type="text" placeholder="Mô tả" autofocus>
+                    <textarea id="noidung" placeholder="Nội Dung" cols="30" rows="5" autofocus></textarea>
+                    <div class="button">
+                        <button id="save" onclick="saveTask()" type="submit">Create</button>
+                        <button id="btn-click" onclick="Upload()" type="submit">UpLoad</button>
+                    </div>
+            </div>
+        </div>
+    </div>
     <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
-    <script src="main.js"></script>
+    <script src="Task.js"></script>
 </body>
 </html>

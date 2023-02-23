@@ -1,7 +1,7 @@
 const api = 'http://localhost:3000/Remimder'
 function start() {
     getNote(render);
-    
+
 }
 const menutoggle = document.querySelector(".menutoggle"),
     navigation = document.querySelector(".navigation"),
@@ -22,10 +22,10 @@ function getNote(cb) {
         .then(response => response.json())
         .then(cb)
 }
-let ids, days, month, year; 
+let ids, days, month, year;
 function render(notes) {
     ObJBlog = notes;
-    ids = ObJBlog.map((note) => {return note.id})
+    ids = ObJBlog.map((note) => { return note.id })
     const listNote = document.querySelector('.row')
     let RenderHtml = notes.map((note) => {
         return `
@@ -60,7 +60,7 @@ var tieude = document.getElementById("tieude"),
     mota = document.getElementById("mota"),
     noidung = document.getElementById("noidung"),
     IDs = document.getElementById("Id");
-function edit(id,day,month,year) {
+function edit(id, day, month, year) {
     ObJBlog.map((note) => {
         if (note.id == id) {
             IDs.value = note.id
@@ -72,50 +72,53 @@ function edit(id,day,month,year) {
             console.log("Lỗi")
         }
 
-    }) 
-   EditData.addEventListener("click", () => {
-    var id = IDs.value
-    console.log(id)
-    let SetData = {
-        day: day,
-        month: month,
-        year: year,
-        Title: tieude.value,
-        Describe: mota.value,
-        Content: noidung.value,  
-    }
-    var requestOptions = {
-        method: 'PUT',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(SetData)
-    };
+    })
+    EditData.addEventListener("click", () => {
+        var id = IDs.value
+        console.log(id)
+        let SetData = {
+            day: day,
+            month: month,
+            year: year,
+            Title: tieude.value,
+            Describe: mota.value,
+            Content: noidung.value,
+        }
+        var requestOptions = {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(SetData)
+        };
 
-    fetch("http://localhost:3000/Remimder/" + id, requestOptions)
-        .then(response => response.json())
-        .then(result => console.log(result))
-        .catch(error => console.log('error', error));
-}) 
+        fetch("http://localhost:3000/Remimder/" + id, requestOptions)
+            .then(response => response.json())
+            .then(result => console.log(result))
+            .catch(error => console.log('error', error));
+    })
 }
 
-function handeldelete(id){
-    setTimeout(
-        
-        document.querySelector(".alert").classList.remove("hide"), 5000);
-    let DelData = {
-        method: 'DELETE',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        redirect: 'follow'
-    };
-    fetch("http://localhost:3000/Remimder/" + id, DelData)
-        .then(response => response.text())
-        .then(result => console.log(result)
+function handeldelete(id) {
+    var confirms = "ban chac chan muon xoa id thu: " + id;
+    if (confirm(confirms) == false) {
+        return;
+    } else {
+        let DelData = {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            redirect: 'follow'
+        };
+        fetch("http://localhost:3000/Remimder/" + id, DelData)
+            .then(response => response.text())
+            .then(result => console.log(result)
 
-        )
-        .catch(error => console.log('error', error));
-       
+            )
+            .catch(error => console.log('error', error));
+    }
+
+
 
 }

@@ -374,8 +374,21 @@ textarea{
     right: 0;
 }
 
-
-
+.btn_Task button{
+    padding: 10px 15px 10px 15px;
+    cursor: pointer;
+    background-color: #e4bfbf;
+    transition: 0.5s;
+    border: none;
+}
+.btn_Task button:hover{
+    background-color: #eb28a0;
+    color: #f2f2f2;
+    box-shadow: 5px 5px rgb(236, 114, 195);
+}
+#btn-click{
+    display: none;
+}
 
 /*
 Blog css
