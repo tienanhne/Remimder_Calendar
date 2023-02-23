@@ -62,14 +62,10 @@ function renderCalendar(data){
         if(data){
             data.forEach(data =>
                 {
-                    if(i === data.day && currMonth === data.month && currYear === data.year){
-
-                        
+                    if(i === data.day && currMonth === data.month && currYear === data.year){                        
                           isToday  = "isToday"
                           return isToday
                     }
-                    console.log(isToday);
-                   
                 })
             
         }
@@ -164,6 +160,7 @@ const Form = document.getElementById("Form")
         CreateBlog(FormData)
         console.log(FormData)
         document.querySelector(".overplay").style.display = "none";
+        setTimeout(document.querySelector(".alert").classList.add("show"), 5000);
     })
 }
 // Blog
@@ -178,6 +175,7 @@ function addNote(data){
     fetch(api,option)
         .then(response => response.json())
 }
+
 
 function DeleteData() {
     let DelData = {
@@ -212,3 +210,5 @@ function openNotifi() {
     }
 }
 openNotifi()
+
+

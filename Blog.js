@@ -3,6 +3,18 @@ function start() {
     getNote(render);
     
 }
+const menutoggle = document.querySelector(".menutoggle"),
+    navigation = document.querySelector(".navigation"),
+    listMenu = document.querySelectorAll(".listMenu");
+menutoggle.onclick = function () {
+    navigation.classList.toggle("openMenu")
+}
+function activeList() {
+    listMenu.forEach((item) => (
+        item.classList.remove('actives')))
+    this.classList.add('actives')
+}
+listMenu.forEach((item) => item.addEventListener('click', activeList))
 var ObJBlog = {};
 start();
 function getNote(cb) {
@@ -20,10 +32,10 @@ function render(notes) {
             <div class="col c-3 box-note">
                 <div class="boxBlog">
                 <p class="date_modal">Ngày ${note.day} Tháng ${note.month + 1} Năm ${note.year}</p>
-                <div class="IdBlog"><span>${note.id}</span><i  data-id="${note.id}"  class='bx bx-edit' onclick = edit(${note.id},${note.day},${note.month},${note.year})></i> </div>
+                <div class="IdBlog"><div><i  data-id="${note.id}"  class='bx bx-edit' onclick = edit(${note.id},${note.day},${note.month},${note.year})></i> <i data-id="${note.id}" class='bx bxs-tag-x' onclick= handeldelete(${note.id})></i></div></div>
                 <h1>${note.Title}</h1>
                 <p>${note.Describe}</p>
-                <p>${note.Content}</p>
+                <p class="fitcontent">${note.Content}</p>
                 </div>
             </div>`
     }).join('')
@@ -85,4 +97,25 @@ function edit(id,day,month,year) {
         .then(result => console.log(result))
         .catch(error => console.log('error', error));
 }) 
+}
+
+function handeldelete(id){
+    setTimeout(
+        
+        document.querySelector(".alert").classList.remove("hide"), 5000);
+    let DelData = {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        redirect: 'follow'
+    };
+    fetch("http://localhost:3000/Remimder/" + id, DelData)
+        .then(response => response.text())
+        .then(result => console.log(result)
+
+        )
+        .catch(error => console.log('error', error));
+       
+
 }

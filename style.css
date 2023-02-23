@@ -186,6 +186,7 @@ textarea{
     background: rgb(40, 50, 85);
     color: #fff;
 }
+
 .lds-hourglass {
     display: inline-block;
     position: relative;
@@ -386,7 +387,7 @@ Blog css
 }
 
 .boxBlog{
-    background-color: #f2f2f2;
+    background-color: #e4bfbf;
     border-radius: 5px;
     min-height: 100px;
     width: 100%;
@@ -395,14 +396,24 @@ Blog css
 .boxBlog h1{
     font-size: 1.5rem;
     border-bottom: 1px solid red;
+    color: #e23e3e;
 }
 .boxBlog p{
     margin-top: 5px;
-    color: #555;
+    color: #0a0a0a;
+    font-weight: bold;
+}
+p.fitcontent{
+    color: #808080;
+    --max-line: 4;
+    --line-height:1.4;
+    height: calc(var(--max-line) * 1em * var(--line-height));
+    line-height: var(--line-height);
+    overflow: hidden;
 }
 .boxBlog .IdBlog {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
     align-items: center;    
 }
 .boxBlog .IdBlog span{
@@ -479,3 +490,54 @@ notify
    opacity: 0.8;
 }
 
+.alert {
+    background: greenyellow;
+    padding: 20px 40px;
+    min-width: 350px;
+    position: absolute;
+    right: 0;
+    top: 100px;
+    border-radius: 4px;
+    border-left: 8px solid #5f9c03;
+}
+
+.alert span .bxs-happy-heart-eyes {
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #5f9c03;
+    font-size: 26px;
+}
+
+.alert .msg {
+    padding: 0 20px;
+    font-size: 18px;
+    color: #5f9c03;
+}
+
+.alert.show {
+    animation: show_slide 1s ease forwards;
+}
+
+@keyframes show_slide {
+    0% {
+        transform: translateX(100%);
+    }
+
+    40% {
+        transform: translateX(-10%);
+    }
+
+    80% {
+        transform: translateX(0%);
+    }
+
+    100% {
+        transform: translateX(-5%);
+    }
+}
+
+.alert.hide {
+    display: none;
+}
