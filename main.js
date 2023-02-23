@@ -202,3 +202,13 @@ function EditData() {
         .then(result => console.log(result))
         .catch(error => console.log('error', error));
 }
+//open notification
+function openNotifi() {
+    const ring = document.querySelector('.btn-ring')
+    ring.onclick = () => {
+        const formNoti = document.querySelector('.form-noti')
+        
+        formNoti.classList.toggle("active")
+    }
+}
+openNotifi()

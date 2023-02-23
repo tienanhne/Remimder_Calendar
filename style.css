@@ -418,4 +418,64 @@ Blog css
 .box-note{
     margin-bottom: 8px;
 }
+/*
+notify
+*/
+.notification{
+    
+}
+.form-noti{
+    position: absolute;
+    right: 0;
+    top: 100%;
+    width: 400px;
+    height: 400px;
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 10px 10px;
+    display: none;
+    z-index: 10;
+}
+.form-noti.active{
+    display: block;
+}
+.list-noti{
+    height: 90%;
+}
+.box-noti{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid red;
+    padding: 10px 0px;
+}
+
+.title-noti{
+    font-size: 26px;
+}
+.btn-full{
+    position: relative;
+    top: -20px;
+    width: 100%;
+    background-color: transparent;
+    border: none;
+    border-top: 2px solid #222;
+    border-bottom: 2px solid #222;
+    padding: 12px 0px;
+    font-size: 18px;
+}
+
+.btn-full::before{
+    position: absolute;
+    content: "";
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 0;
+    z-index: 1;
+}
+.btn-full:hover{
+   background-color: #ccc;
+   opacity: 0.8;
+}
 
