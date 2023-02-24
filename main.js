@@ -31,18 +31,18 @@ listMenu.forEach((item) => item.addEventListener('click', activeList))
 //     }, 2500)
 // })
 
-// const arrayMonth = ["January",
-//     "February",
-//     "March",
-//     "April",
-//     "May ",
-//     "June ",
-//     "July",
-//     "August ",
-//     "September",
-//     "October ",
-//     "November",
-//     "December"]
+const arrayMonth = ["January",
+    "February",
+    "March",
+    "April",
+    "May ",
+    "June ",
+    "July",
+    "August ",
+    "September",
+    "October ",
+    "November",
+    "December"]
 
 function renderCalendar(data){
     console.log(data);
@@ -210,5 +210,51 @@ function openNotifi() {
     }
 }
 openNotifi()
+getNotify();
+function getNotify(){
+    fetch(api)
+        .then(response => response.json())
+        .then(renderNotify)
+}
+function renderNotify(notify){
+    console.log(notify);
+    const listNoti =  document.querySelector('.list-noti')
+    let html = notify.map((notify,index) => {
+        let dayNextTime = getDayNext(notify.day, notify.month, notify.year);
+        return `
+            <div class="box-noti">
+                <div class="content-noti">
+                    <h3 class="title-noti">${notify.Title}</h3>
+                    <p>${notify.Describe}</p>
+                </div>
+                <div class="time-noti">
+                     ${dayNextTime}
+                </div>
+            </div>
+        `
+    }).join('')
+    listNoti.innerHTML = html
+
+}
+function getDayNext(dayNote,monthNote,year){
+    let month = arrayMonth[monthNote]
+    const countDate = new Date(`${dayNote} ${month} ${year}`).getTime()
+    const now = new Date().getTime()
+    const gap = countDate - now;
+    const second = 1000;
+    const minute = second * 60;
+    const hour = minute * 60;
+    const day = hour * 24;
+    const textDay = Math.floor(gap / day);
+    const textHour = Math.floor((gap % day) / hour)
+    if(textDay > 1){
+        return `${textDay} ngày ${textHour} giờ`
+
+    }
+    else{
+        return `${textHour} giờ`
+    }
+}
+
 
 
