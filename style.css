@@ -480,6 +480,9 @@ notify
 .btn-full{
     position: relative;
     top: -20px;
+    display: block;
+    text-align: center;
+    text-decoration: none;
     width: 100%;
     background-color: transparent;
     border: none;
@@ -487,6 +490,7 @@ notify
     border-bottom: 2px solid #222;
     padding: 12px 0px;
     font-size: 18px;
+    color: #0a0a0a;
 }
 
 .btn-full::before{
