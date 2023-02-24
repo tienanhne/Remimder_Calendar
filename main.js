@@ -1,4 +1,4 @@
-const currentDate = document.querySelector(".current_date"),
+ const currentDate = document.querySelector(".current_date"),
     daysTag = document.querySelector(".days"),
     leftorright = document.querySelectorAll(".icons span"),
     Node = document.getElementById('tagname'),
@@ -176,30 +176,6 @@ function addNote(data){
         .then(response => response.json())
 }
 
-
-function DeleteData() {
-    let DelData = {
-        method: 'DELETE',
-        redirect: 'follow'
-    };
-    fetch("http://localhost:3050/Remimder", DelData)
-        .then(response => response.text())
-        .then(result => console.log(result)
-
-        )
-        .catch(error => console.log('error', error));
-}
-function EditData() {
-    let PutData = {
-        method: 'PUT',
-        redirect: 'follow'
-    };
-
-    fetch("http://localhost:3050/Remimder", PutData)
-        .then(response => response.text())
-        .then(result => console.log(result))
-        .catch(error => console.log('error', error));
-}
 //open notification
 function openNotifi() {
     const ring = document.querySelector('.btn-ring')
@@ -224,7 +200,7 @@ function renderNotify(notify){
     let html = notifySort.map((notifySort,index) => {
         let dayNextTime = getDayNext(notifySort.day, notifySort.month, notifySort.year);
         let timeNow = new Date().getTime();
-        let timeNote = new Date(`${notifySort.day}  ${arrayMonth[notifySort.month]}${notifySort.year}`)
+        let timeNote = new Date(`${notifySort.day}${arrayMonth[notifySort.month]}${notifySort.year}`)
         if(timeNote > timeNow){
             if(count < 4){
                 count++;
