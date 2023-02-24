@@ -216,16 +216,17 @@ function getNotify(){
         .then(response => response.json())
         .then(renderNotify)
 }
+
 function renderNotify(notify){
-    console.log(notify);
+    const notifySort = sortUp(notify);
     const listNoti =  document.querySelector('.list-noti')
-    let html = notify.map((notify,index) => {
-        let dayNextTime = getDayNext(notify.day, notify.month, notify.year);
+    let html = notifySort.map((notifySort,index) => {
+        let dayNextTime = getDayNext(notifySort.day, notifySort.month, notifySort.year);
         return `
             <div class="box-noti">
                 <div class="content-noti">
-                    <h3 class="title-noti">${notify.Title}</h3>
-                    <p>${notify.Describe}</p>
+                    <h3 class="title-noti">${notifySort.Title}</h3>
+                    <p>${notifySort.Describe}</p>
                 </div>
                 <div class="time-noti">
                      ${dayNextTime}
@@ -235,6 +236,20 @@ function renderNotify(notify){
     }).join('')
     listNoti.innerHTML = html
 
+}
+function sortUp(arrNotify){
+    for(let i = 0; i < arrNotify.length; i++){
+        for(let j = i + 1; j < arrNotify.length; j++){
+            let timeNow = new Date(`${arrNotify[i].day} ${arrayMonth[arrNotify[i].month]} ${arrNotify[i].year}`).getTime()
+            let timeSkip = new Date(`${arrNotify[j].day} ${arrayMonth[arrNotify[j].month]} ${arrNotify[j].year}`).getTime()
+            if(timeNow > timeSkip){
+                let temp = arrNotify[i];
+                arrNotify[i] = arrNotify[j];
+                arrNotify[j] = temp;
+            }
+        }
+    }
+    return arrNotify;
 }
 function getDayNext(dayNote,monthNote,year){
     let month = arrayMonth[monthNote]
