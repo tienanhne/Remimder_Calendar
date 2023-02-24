@@ -220,19 +220,28 @@ function getNotify(){
 function renderNotify(notify){
     const notifySort = sortUp(notify);
     const listNoti =  document.querySelector('.list-noti')
+    let count = 0;
     let html = notifySort.map((notifySort,index) => {
         let dayNextTime = getDayNext(notifySort.day, notifySort.month, notifySort.year);
-        return `
-            <div class="box-noti">
-                <div class="content-noti">
-                    <h3 class="title-noti">${notifySort.Title}</h3>
-                    <p>${notifySort.Describe}</p>
+        let timeNow = new Date().getTime();
+        let timeNote = new Date(`${notifySort.day}  ${arrayMonth[notifySort.month]}${notifySort.year}`)
+        if(timeNote > timeNow){
+            if(count < 4){
+                count++;
+                return `
+                <div class="box-noti">
+                    <div class="content-noti">
+                        <h3 class="title-noti">${notifySort.Title}</h3>
+                        <p>${notifySort.Describe}</p>
+                    </div>
+                    <div class="time-noti">
+                        ${dayNextTime}
+                    </div>
                 </div>
-                <div class="time-noti">
-                     ${dayNextTime}
-                </div>
-            </div>
-        `
+                `
+            }
+            
+        }
     }).join('')
     listNoti.innerHTML = html
 
