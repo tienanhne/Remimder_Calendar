@@ -23,12 +23,42 @@ function getNote(cb) {
         .then(response => response.json())
         .then(cb)
 }
-let ids, days, month, year;
+let ids;
+const arrayMonth = ["January",
+    "February",
+    "March",
+    "April",
+    "May ",
+    "June ",
+    "July",
+    "August ",
+    "September",
+    "October ",
+    "November",
+    "December"]
+
+
+function sortUp(arrNotify){
+    for(let i = 0; i < arrNotify.length; i++){
+        for(let j = i + 1; j < arrNotify.length; j++){
+            let timeNow = new Date(`${arrNotify[i].day} ${arrayMonth[arrNotify[i].month]} ${arrNotify[i].year}`).getTime()
+            let timeSkip = new Date(`${arrNotify[j].day} ${arrayMonth[arrNotify[j].month]} ${arrNotify[j].year}`).getTime()
+            if(timeNow > timeSkip){
+                let temp = arrNotify[i];
+                arrNotify[i] = arrNotify[j];
+                arrNotify[j] = temp;
+            }
+        }
+    }
+    return arrNotify;
+}
+
 function render(notes) {
+    let SortArray = sortUp(notes)
     ObJBlog = notes;
     ids = ObJBlog.map((note) => { return note.id })
     const listNote = document.querySelector('.row')
-    let RenderHtml = notes.map((note) => {
+    let RenderHtml = SortArray.map((note) => {
         return `
             <div class="col c-3 box-note">
                 <div class="boxBlog">
