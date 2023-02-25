@@ -3,6 +3,7 @@ function start() {
     getNote(render);
 
 }
+
 const menutoggle = document.querySelector(".menutoggle"),
     navigation = document.querySelector(".navigation"),
     listMenu = document.querySelectorAll(".listMenu");

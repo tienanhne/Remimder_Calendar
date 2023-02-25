@@ -77,13 +77,21 @@ function renderCalendar(data){
     for (let i = lastdatofmonth; i < 6; i++) {
         liTag += `<li onclick="clickNode()" class="inactive">${i - lastdatofmonth + 1}</li>`
     }
+    liTag += `<div class="note-important">
+    <span class="time-note"></span>
+    <p></p>
+    <div class="list-btn">
+        <button class = "noteBtn" onclick="updateNote()">Update </button>
+        <button onclick="delNote()" class="noteBtn btn-del" >Delete</button>
+    </div>
+    </div>`
     currentDate.innerHTML = `Tháng ${currMonth + 1} ${currYear}`
     if (daysTag) {
         daysTag.innerHTML = liTag;
     } else {
         console.log('element not found');
     }
-    
+    openBox(data,currMonth,currYear);
 }
 const api = 'http://localhost:3000/Remimder'
 function getNote() {
@@ -106,6 +114,33 @@ leftorright.forEach(icon => {
         getNote();
     })
 })
+function openBox(data,month,year){
+    const dayNote = document.querySelectorAll('.isToday')
+    console.log(dayNote);
+    const boxNote =document.querySelector('.note-important')
+    const timeBox = document.querySelector('.note-important .time-note')
+    const contentHtml = document.querySelector('.note-important p')
+    
+    dayNote.forEach(note => {
+        
+        note.onmouseover = () => {
+                const dayNoteHover = Number(note.innerText)
+                contentHtml.innerHTML = data.map(data => {
+                    if(dayNoteHover === data.day && month === data.month && year === data.year){
+                        return data.Title
+                    }
+                    boxNote.classList.add('note-active')
+                }).join('')
+                timeBox.innerHTML = `${dayNoteHover}/${month}/${year}`
+        }
+        note.onmouseout = () => {
+            setTimeout(() => boxNote.classList.remove('note-active'),4000)
+        }
+
+    })
+   
+
+}
 var overplay = document.querySelector(".overplay"),
     reminderDate = document.querySelector(".dateView"),
     modalshow = document.querySelector(".modalBox");
@@ -260,6 +295,7 @@ function sortUp(arrNotify){
     }
     return arrNotify;
 }
+
 function getDayNext(dayNote,monthNote,year){
     let month = arrayMonth[monthNote]
     const countDate = new Date(`${dayNote} ${month} ${year}`).getTime()

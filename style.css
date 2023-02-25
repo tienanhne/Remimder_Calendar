@@ -68,6 +68,7 @@ header .icons span:last-child{
     text-align: center;
 }
 .calendar .days{
+    position: relative;
     margin-bottom: 18px;
 }
 .calendar .weeks li{
@@ -557,4 +558,63 @@ notify
 
 .alert.hide {
     display: none;
+}
+
+/* 
+    box-note
+*/
+.note-important{
+    position: absolute;
+    opacity: 1;
+    width: 200px;
+    top: 0;
+    left: calc(100% + 40px);
+    background-color: #fff;
+    padding: 20px;
+    animation: fadeOut 0.3s ease-in;
+    border-radius: 10px;
+    z-index: 10;
+    display: none;
+}
+.note-important p{
+    margin-bottom: 20px;
+}
+.list-btn{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.list-btn button{
+    background-color: rgb(106, 220, 106);
+    border: none;
+    border-radius: 10px;
+    padding: 10px ;
+    cursor: pointer;
+}
+.list-btn button:first-child{
+    background-color: rgb(215, 215, 82);
+    
+}
+@keyframes fadeOut{
+    from{
+        left: 90%;
+        opacity: 0;
+    }
+    to{
+        left: 100%;
+        opacity: 1;
+    }
+}
+.note-important.note-active{
+    display:  block;
+}
+.note-show{
+    border-radius: 0px;
+    border-bottom: 5px solid red;
+}
+.time-note{
+    padding: 10px 0px 5px 0px;
+    display: block;
+    text-align: center;
+    border-bottom: 2px solid red;
 }
