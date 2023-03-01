@@ -80,10 +80,7 @@ function renderCalendar(data){
     liTag += `<div class="note-important">
     <span class="time-note"></span>
     <p></p>
-    <div class="list-btn">
-        <button class = "noteBtn" onclick="updateNote()">Update </button>
-        <button onclick="delNote()" class="noteBtn btn-del" >Delete</button>
-    </div>
+  
     </div>`
     currentDate.innerHTML = `Tháng ${currMonth + 1} ${currYear}`
     if (daysTag) {
